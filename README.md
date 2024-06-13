@@ -21,18 +21,15 @@ Flask web application that allows users to execute Ansible commands via a user-f
    git clone <repository_url>
    ```
 
-2. **Create config file for docker-compose with variables:**
+2. **Install dependencies:**
 
-    Create the `.env` file based on the `.env.example` and place it inside the root project folder. It contains the variables for the docker-compose:
-    
-    ```ini    
-   HOME_DIR=/home/yourusername
-   ; Location of the home directory of the user used to access to the host with ansible using its ssh key.
+    ```
+    pip install -r requirements.txt
     ```
 
 3. **Configure the application by editing the `config.ini` file.**
 
-   Create the `config.ini` files based on the `config.ini.example`. The `config.ini` file contains configuration variables for the application. Here are the variables you can configure:
+   The `config.ini` file contains configuration variables for the application. Here are the variables you can configure:
 
    ```ini
    [app]
@@ -65,17 +62,16 @@ Flask web application that allows users to execute Ansible commands via a user-f
 
    server_name = 127.0.0.1
    ; Server name or IP address for the Flask application.
+
+4. **Run the Flask application:**
     ```
-4. **Build command to create the container image:**
+    cd ansible_cli_app
     ```
-    sudo docker-compose build --no-cache
     ```
-5. **Run the Flask app in the docker container:**   
-    ```
-    sudo docker-compose up
+    python3 -m ansible_webx.app.run
     ```
 
-6. **Access the application in your web browser at [http://127.0.0.1:5005].**
+5. **Access the application in your web browser at [http://127.0.0.1:5005].**
 
 ## Usage
 
