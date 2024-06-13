@@ -1,0 +1,25 @@
+<label>Extra Vars Sites:</label>
+<div id="extra-vars-sites-container" class="extra-vars-site-container">
+    <!-- Display extra vars -->
+    {% if last_form.extra_vars_sites %}
+        <!-- Loop through extra_vars and create input fields -->
+        {% for key, value in last_form.extra_vars_sites.items() %}
+            <div>
+                <input type="text" id="extra-vars-sites-key-input" class="extra-vars-sites-key-input" name="extra_vars_sites_key" list="extra-vars-sites-key-options" value="{{ key }}">
+                <datalist id="extra-vars-sites-key-options">
+                    {% for option in extra_vars_sites_key_options %}
+                        <option value="{{ option }}"></option>
+                    {% endfor %}
+                </datalist>
+                <div class="value-container">
+                    <span>=</span>
+                    <select id="extra-vars-sites-value-input" class="extra-vars-sites-value-input" name="extra_vars_sites_value" multiple>
+                        {% for option in extra_vars_sites_value_options %}
+                            <option value="{{ option }}" {% if option in value %} selected {% endif %}>{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

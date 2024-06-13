@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  ansible-webx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ansible-webx
+    container_name: ansible-webx    
+    ports:
+      - "5005:5005"
+    volumes:
+      - ../server-iac-example:/server-iac-example
+      - ${HOME_DIR}/.ssh:/root/.ssh
+    stdin_open: true
+    tty: true

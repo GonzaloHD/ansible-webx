@@ -1,0 +1,135 @@
+
+body {
+    background-color: black; /* Set background color to black */
+    color: white; /* Set text color to white */
+}
+
+/* Styles for the form */
+form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Align items to the start of the flex container */
+}
+label, input, button {
+    margin: 5px; /* Adjust margin as needed */
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+.extra-vars-container, .tags-container {
+    display: flex;
+    flex-direction: column;
+}
+.extra-var-input, .tag-input {
+    margin-bottom: 5px;
+    height: 30px; /* Set a fixed height for the input fields */
+    width: 300px; /* Set the width of the input fields */
+}
+/* Style the remove buttons */
+.remove-button {
+    margin-top: 5px;
+    background-color: #f44336; /* Red color */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+/* Style the execute button */
+#execute-button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#execute-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Style the load values button */
+.commandListButtons, .add-button {
+    padding: 5px 10px;
+    background-color: #2196F3; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.commandListButtons:hover, .add-button:hover {
+    background-color: #0b7dda; /* Darker blue on hover */
+}
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+.warning-message {
+    color: rgb(216, 158, 0);
+    margin-top: 10px;
+}
+
+.ansi2html-content {
+    padding: 0; 
+    margin: 0 !important;
+}
+
+.value-container {
+    display: inline-flex;
+    align-items: top;
+}
+
+.value-container select {
+    margin-left: 10px;
+    margin-right: 10px
+}
+.input-container, .extra-vars-container, .tags-container {
+    padding: 5px;
+    margin-left: 10px; 
+    margin-right: 10px;
+    
+}
+
+#logo {
+    width: 100px; /* Adjust width as needed */
+    height: auto; /* Automatically adjust height to maintain aspect ratio */
+    float: left; /* Float the image to the left */
+    margin-right: 10px; /* Add some space between the logo and the text */
+}
+
+#title {
+    margin-top: 0; /* Remove default margin from the title */
+    line-height: 100px; /* Vertically center the title with the logo */
+}
+
+/* ANSI style */
+
+/* Color seen */
+.ansi1 { font-weight: bold; }
+.ansi31 { color: #aa0000; }
+.ansi35 { color: #E850A8; }
+.ansi32 { color: #00aa00; }
+.ansi36 { color: #00aaaa; }
+/* Just in case as they could appear */
+.ansi33 { color: #aa7700; } /* Yellow */
+.ansi34 { color: #0000aa; } /* Blue */
+.ansi37 { color: #aaaaaa; } /* White */
+.ansi90 { color: #555555; } /* Dark Gray */
+.ansi91 { color: #ff5555; } /* Bright Red */
+.ansi92 { color: #55ff55; } /* Bright Green */
+.ansi93 { color: #ffff55; } /* Bright Yellow */
+.ansi94 { color: #5555ff; } /* Bright Blue */
+.ansi95 { color: #ff55ff; } /* Bright Magenta */
+.ansi96 { color: #55ffff; } /* Bright Cyan */
+

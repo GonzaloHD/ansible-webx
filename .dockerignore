@@ -1,0 +1,15 @@
+.git
+__pycache__/
+flask_session
+config.ini.example
+Notes.txt
+README.md
+.gitignore
+venv
+collections
+.style.yapf
+Dockerfile
+docker-compose.yml
+.dockerignore
+.env
+.env.example

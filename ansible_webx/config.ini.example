@@ -1,0 +1,16 @@
+[app]
+root_directory = /home/user/projects/ansilbe-folder
+playbook = playbook.yml
+# 'cliente' or 'all' to emit stdout
+emit = client
+
+[flask]
+app_key = abcd1234
+host = 0.0.0.0
+port = 5005
+protocol = http
+debug = True
+server_name = 127.0.0.1
+max_commands_to_show = 5
+
+

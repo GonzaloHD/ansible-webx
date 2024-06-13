@@ -1,0 +1,111 @@
+<!-- templates/dynamic.html -->
+<h2>Executed command list:</h2>
+
+<ul>
+    {% for id, input in inputs.items() %}
+        <li id="{{ id }}">
+            ansible-playbook {{ input.playbook }} {% if input.tags %} --tags "{{ ','.join(input.tags) }}" {% endif %} 
+            {% if input.extra_vars is not none %} --extra-vars {{ "'" + input.extra_vars | tojson + "'" }} {% endif %} 
+            {% if input.limit %} --limit "{{ input.limit }}" {% endif %}
+            
+            <!-- Button to trigger variable loading for this specific li -->
+            <button id="input-button-{{ input.id }}" class="commandListButtons" onclick="loadValues('{{ id }}')">Load Form</button>
+            
+            <!-- Button to copy text -->
+            <button id="copy-button-{{ input.id }}" class="commandListButtons" onclick="copyText('{{ id }}')">Copy Command</button>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Execute Ansible</h2>
+<form method="post" action="/execute_ansible" onsubmit="handleSubmit(event)">
+    <div class="input-container">
+        <label for="limit">Server:</label>
+        <input type="text" id="limit-input" class="limit-input" name="limit" list="limit-options" value="{{ last_form.limit }}" onchange="handleSelected(event)">
+        <datalist id="limit-options">
+            {% for server in server_options %}
+                <option value="{{ server }}">{{ server }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="input-container">
+        <label for="tags">Tags:</label>
+        <div id="tags-container" class="tags-container">
+            <!-- Display tags -->
+            {% if last_form.tags %}
+                <!-- Loop through tags and create input fields -->
+                {% for tag in last_form.tags %}
+                    <div class="tag-input-divs" id="tag-input-div-{{ loop.index0 }}">
+                        <input type="text" id="tag-input-{{ loop.index0 }}" class="tag-input" name="tags" list="tag-options" value="{{ tag }}" onchange="handleSelected(event)">
+                        <datalist id="tag-options">
+                            {% for option in tag_options %}
+                                <option value="{{ option }}"></option>
+                            {% endfor %}
+                        </datalist>
+                        <button type="button" id="remove-button-tag-{{ loop.index0 }}" class="remove-button-tags remove-button">Remove</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <!-- Button to add a new tags input field -->
+        <button id="tag-add-button" class="add-button" type="button" onclick="addTagInput()">Add Tag</button>
+    </div>
+
+    <div id="extra-vars-sites-section" class="input-container"></div>
+
+    <div class="extra-vars-container">
+        <label>Other Extra Vars:</label>
+        <div id="extra-vars-container" class="extra-vars-container">
+            <!-- Display extra vars -->
+            {% if last_form.extra_vars %}
+                <!-- Loop through extra_vars and create input fields -->
+                {% for extra_var in last_form.extra_vars %}
+                    <div id="extra-var-input-div-{{ loop.index0 }}" class="extra-var-input-div">
+                        <input type="text" id="extra-var-input-{{ loop.index0 }}" class="extra-var-input" name="extra_vars" value="{{ extra_var }}">
+                        <button id="remove-button-extra-var-{{ loop.index0 }}" type="button" class="remove-button-vars remove-button">Remove</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <!-- Button to add a new extra_vars input field -->
+        <button id="extra-var-add-button" class="add-button" type="button" onclick="addExtraVarInput()">Add Extra Var</button>
+    </div>
+
+    <input type="submit" id="execute-button" value="Execute">
+</form>
+
+<!-- Display info from the stdoutput -->
+{% if play_recap or error_output or warning_output %}
+    <div class="output-response" style="padding: 0; margin: 0;">
+        <h1>Results:</h1>
+        {% if error_output %}
+            <h3>Errors: </h3>
+            {% for error in error_output %}
+                <pre>{{ error | safe}}</pre>
+            {% endfor %}  
+        {% endif %}   
+        {% if warning_output %}
+            <h3>Warnings: </h3>
+            {% for warning in warning_output %}
+                <pre>{{ warning | safe}}</pre>
+            {% endfor %}  
+        {% endif %}   
+        {% if play_recap %}
+            <h3>PLAY RECAP: </h3>  
+            <pre>{{ play_recap | safe}}</pre>  
+        {% endif %}        
+    </div>
+{% endif %}
+
+<!-- Display error message, if any -->
+{% if warning_message %}
+    <p class="warning-message">{{ warning_message }}</p>
+{% endif %}
+
+<!-- Display error message, if any -->
+{% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+{% endif %}
+
+<!-- Display loading message -->
+<p class="load-message"></p>

@@ -1,0 +1,2 @@
+dependencies:
+  ansible.utils:    '>=2.6.1'

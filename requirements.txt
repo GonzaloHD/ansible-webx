@@ -1,0 +1,14 @@
+PyYAML==6.0.1
+ansible==9.4.0
+ansible-runner==2.3.6
+ansi2html==1.9.1
+Flask-SocketIO==5.3.6
+requests==2.31.0
+Flask==3.0.3
+Flask-Session==0.8.0
+Flask-Cors==4.0.1
+jmespath==1.0.1
+
+# Optional or if used in a production environment
+gevent==24.2.1
+gevent-websocket==0.10.1
