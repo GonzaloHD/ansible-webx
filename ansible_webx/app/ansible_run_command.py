@@ -139,7 +139,7 @@ if __name__ == '__main__':
 
     playbook_directory = f"{config['app'].get('root_directory')}"
     playbook = 'playbook.yml'
-    extra_vars = {"single_site": "server.com"}
+    extra_vars = {"one_site": "server.com"}
     tags = ["prepare_website"]
     limit = "server"
 
